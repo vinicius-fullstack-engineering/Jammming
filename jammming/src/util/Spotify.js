@@ -1,3 +1,5 @@
+//Still solving problems about the integration with Spotify API
+
 const clientId = 'b3d627dae26b4872bbb1bd61680a3128';
 const redirectUri = 'https://vinidevjammming.surge.sh/';
 
