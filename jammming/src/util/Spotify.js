@@ -1,5 +1,5 @@
-const clientId = '6615f13eccf8476ab144c1f8e611d838';
-const redirectUri = 'http://vinidevtech.surge.sh/';
+const clientId = 'b3d627dae26b4872bbb1bd61680a3128';
+const redirectUri = 'http://vinidevjammming.surge.sh/';
 
 let accessToken = '';
 
