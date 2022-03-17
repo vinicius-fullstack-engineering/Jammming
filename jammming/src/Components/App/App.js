@@ -13,8 +13,8 @@ class App extends React.Component {
 
     this.state = {
       searchResults: [],
-        playlistName: 'My Playlist',
-        playlistTracks: []
+      playlistName: 'My Playlist',
+      playlistTracks: []
     };
     this.addTrack = this.addTrack.bind(this);
     this.removeTrack = this.removeTrack.bind(this);
@@ -55,10 +55,9 @@ class App extends React.Component {
   }
 
   search(term) {
-    console.log(term);
     Spotify.search(term).then(searchResults => {
       this.setState({searchResults: searchResults})
-    });
+    })
   }
 
   render() {

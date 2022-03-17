@@ -3,7 +3,7 @@
 const clientId = 'b3d627dae26b4872bbb1bd61680a3128';
 const redirectUri = 'https://vinidevjammming.surge.sh/';
 
-let accessToken = '';
+let accessToken;
 
 const Spotify = {
   getAccessToken() {
@@ -30,24 +30,25 @@ const Spotify = {
 
   search(term) {
     const accessToken = Spotify.getAccessToken();
-    return fetch(`https://api.spotify.com/v1/search?type=track&q=${term}`, { 
-      headers: {
-        Authorization: `Bearer ${accessToken}`
-      }
-    }).then(response => {
-      return response.json();
-    }).then(jsonResponse => {
-      if (!jsonResponse.tracks) {
-        return [];
-      }
-      return jsonResponse.tracks.items.map(track => ({
-        id: track.id,
-        name: track.name,
-        artist: track.artists[0].name,
-        album: track.album.name,
-        uri: track.uri
-      }))
-    })
+    return fetch(`https://api.spotify.com/v1/search?type=track&q=${term}`, 
+      { 
+      headers: {Authorization: `Bearer ${accessToken}`}
+      }).then(response => {
+        return response.json();
+      }).then(jsonResponse => {
+        if (!jsonResponse.tracks) {
+          return [];
+        }
+        return jsonResponse.tracks.items.map(track => (
+          {
+            id: track.id,
+            name: track.name,
+            artist: track.artists[0].name,
+            album: track.album.name,
+            uri: track.uri
+          }
+        ))
+      })
   },
 
   savePlaylist(name, trackUris) {
@@ -59,9 +60,8 @@ const Spotify = {
     const headers = {Authorization: `Bearer ${accessToken}`};
     let userId;
 
-    return fetch('https://api.spotify.com/v1/me', {
-      headers: headers
-    }).then(response => response.json()
+    return fetch('https://api.spotify.com/v1/me', {headers: headers}
+    ).then(response => response.json()
     ).then(jsonResponse => {
       userId = jsonResponse.id;
       return fetch(`https://api.spotify.com/v1/users/${userId}/playlists`,
